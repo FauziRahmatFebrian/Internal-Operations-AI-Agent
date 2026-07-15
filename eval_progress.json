@@ -1,0 +1,133 @@
+{
+  "R001": {
+    "user_input": "What information do I need to include when I request a data export?",
+    "expected_intent": "knowledge_question",
+    "predicted_intent": "knowledge_question",
+    "tools_used": [
+      "classify_request",
+      "search_knowledge_base"
+    ],
+    "confidence": "high",
+    "recommended_action": "Answer user directly"
+  },
+  "R002": {
+    "user_input": "My account keeps getting locked out and I can't get back in no matter what I try.",
+    "expected_intent": "ticket_triage",
+    "predicted_intent": "ticket_triage",
+    "tools_used": [
+      "classify_request",
+      "search_knowledge_base"
+    ],
+    "confidence": "high",
+    "recommended_action": "Escalate to Account Access team if the user's issue persists"
+  },
+  "R003": {
+    "user_input": "Please open a ticket for engineering about the recurring API 500 errors we saw this morning.",
+    "expected_intent": "create_task",
+    "predicted_intent": "create_task",
+    "tools_used": [
+      "classify_request",
+      "create_task_object"
+    ],
+    "confidence": "high",
+    "recommended_action": "Review and create task in the internal system"
+  },
+  "R004": {
+    "user_input": "Can you tell me what salary my coworker is earning?",
+    "expected_intent": "cannot_answer",
+    "predicted_intent": "cannot_answer",
+    "tools_used": [
+      "classify_request"
+    ],
+    "confidence": "low",
+    "recommended_action": "Escalate to human support"
+  },
+  "R005": {
+    "user_input": "When are invoices generated?",
+    "expected_intent": "knowledge_question",
+    "predicted_intent": "knowledge_question",
+    "tools_used": [
+      "classify_request",
+      "search_knowledge_base"
+    ],
+    "confidence": "high",
+    "recommended_action": "Answer user directly"
+  },
+  "R006": {
+    "user_input": "I keep getting a 500 error when calling the API.",
+    "expected_intent": "ticket_triage",
+    "predicted_intent": "ticket_triage",
+    "tools_used": [
+      "classify_request",
+      "search_knowledge_base"
+    ],
+    "confidence": "high",
+    "recommended_action": "Escalate to Technical Issue team if the user's issue persists"
+  },
+  "R007": {
+    "user_input": "Create a task for engineering to investigate the repeated API 500 errors.",
+    "expected_intent": "create_task",
+    "predicted_intent": "create_task",
+    "tools_used": [
+      "classify_request",
+      "create_task_object"
+    ],
+    "confidence": "high",
+    "recommended_action": "Review and create task in the internal system"
+  },
+  "R008": {
+    "user_input": "How many requests per minute can I make to the API?",
+    "expected_intent": "knowledge_question",
+    "predicted_intent": "knowledge_question",
+    "tools_used": [
+      "classify_request",
+      "search_knowledge_base"
+    ],
+    "confidence": "high",
+    "recommended_action": "Answer user directly"
+  },
+  "R009": {
+    "user_input": "My account got locked after too many failed logins, what do I do?",
+    "expected_intent": "knowledge_question",
+    "predicted_intent": "ticket_triage",
+    "tools_used": [
+      "classify_request",
+      "search_knowledge_base"
+    ],
+    "confidence": "high",
+    "recommended_action": "Escalate to Account Access team if the user's issue persists"
+  },
+  "R010": {
+    "user_input": "Can you summarize our current refund and billing policies for me?",
+    "expected_intent": "summarize_request",
+    "predicted_intent": "summarize_request",
+    "tools_used": [
+      "classify_request",
+      "search_knowledge_base",
+      "summarize_text"
+    ],
+    "confidence": "high",
+    "recommended_action": "Answer user directly"
+  },
+  "R011": {
+    "user_input": "What is the weather like in Jakarta today?",
+    "expected_intent": "cannot_answer",
+    "predicted_intent": "cannot_answer",
+    "tools_used": [
+      "classify_request"
+    ],
+    "confidence": "low",
+    "recommended_action": "Escalate to human support"
+  },
+  "R012": {
+    "user_input": "Set up two factor authentication is not working for my account, please help.",
+    "expected_intent": "ticket_triage",
+    "predicted_intent": "ticket_triage",
+    "tools_used": [
+      "classify_request",
+      "search_knowledge_base"
+    ],
+    "confidence": "high",
+    "recommended_action": "Escalate to Account Access team if the user's issue persists"
+  }
+}

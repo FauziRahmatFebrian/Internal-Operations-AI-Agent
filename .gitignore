@@ -1,0 +1,61 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+.cache/
+
+# Virtual environments
+venv/
+.env/
+env/
+.ai/
+ai/Lib/
+ai/Scripts/
+ai/Include/
+ai/pyvenv.cfg
+
+# Environment variables
+.env
+.env.*
+
+# IDEs and editors
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Logs and runtime
+*.log
+*.pot
+*.coverage
+coverage.xml
+htmlcov/
+*.pid
+*.seed
+*.sqlite3
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Data files
+data/*.csv
+
+# Python bytecode
+*~
+
+# Sensitive files
+secret.txt
+credentials.json
+
+# Model files/large binaries
+*.gguf
+*.bin
+*.pth
+*.pt
+*.safetensors
+*.ckpt
