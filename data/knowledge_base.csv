@@ -1,0 +1,11 @@
+doc_id,title,content,category
+KB001,Password Reset Policy,"Users can reset their password using the forgot password page. If reset fails, escalate to IT support.",Account Access
+KB002,Invoice Schedule,"Invoices are generated every Monday and sent to the registered billing email.",Billing
+KB003,API Error Handling,"API 500 errors should be escalated to engineering with request ID and timestamp.",Technical Issue
+KB004,Data Export Request,"Data export requests must include date range, requester email, and business justification.",Data Request
+KB005,Account Lockout Policy,"Accounts are locked after 5 failed login attempts within 15 minutes. Users must wait 30 minutes or contact IT support to unlock manually.",Account Access
+KB006,Refund Policy,"Refunds are processed within 7 business days after approval. Customers must submit a refund request through the billing portal.",Billing
+KB007,Product Feature Overview,"The reporting dashboard supports daily, weekly, and monthly views. Custom date ranges are available on the Pro plan and above.",Product Question
+KB008,Two-Factor Authentication Setup,"Two-factor authentication can be enabled from Account Settings > Security. Supported methods are SMS and authenticator apps.",Account Access
+KB009,API Rate Limits,"The public API allows 100 requests per minute per API key. Exceeding this limit returns a 429 error and requires a 60 second cooldown.",Technical Issue
+KB010,Support Ticket SLA,"High priority tickets are responded to within 2 hours. Medium priority within 8 hours. Low priority within 24 hours.",General Inquiry

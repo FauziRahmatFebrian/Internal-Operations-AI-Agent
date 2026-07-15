@@ -1,0 +1,13 @@
+request_id,user_input,expected_intent,expected_action
+R001,What information do I need to include when I request a data export?,knowledge_question,answer_from_kb
+R002,My account keeps getting locked out and I can't get back in no matter what I try.,ticket_triage,categorize_and_prioritize
+R003,Please open a ticket for engineering about the recurring API 500 errors we saw this morning.,create_task,generate_task_object
+R004,Can you tell me what salary my coworker is earning?,cannot_answer,escalate_to_human
+R005,When are invoices generated?,knowledge_question,answer_from_kb
+R006,I keep getting a 500 error when calling the API.,ticket_triage,categorize_and_prioritize
+R007,Create a task for engineering to investigate the repeated API 500 errors.,create_task,generate_task_object
+R008,How many requests per minute can I make to the API?,knowledge_question,answer_from_kb
+R009,"My account got locked after too many failed logins, what do I do?",knowledge_question,answer_from_kb
+R010,Can you summarize our current refund and billing policies for me?,summarize_request,summarize_kb_sections
+R011,What is the weather like in Jakarta today?,cannot_answer,escalate_to_human
+R012,"Set up two factor authentication is not working for my account, please help.",ticket_triage,categorize_and_prioritize

@@ -1,61 +1,28 @@
-# Python
-__pycache__/
-*.py[cod]
-*$py.class
-.pytest_cache/
-.cache/
-
-# Virtual environments
+# Virtual environment folders
+ai/
 venv/
-.env/
-env/
-.ai/
-ai/Lib/
-ai/Scripts/
-ai/Include/
-ai/pyvenv.cfg
 
-# Environment variables
+# Environment variable files
 .env
 .env.*
 
-# IDEs and editors
-.vscode/
-.idea/
-*.sublime-project
-*.sublime-workspace
+# Python cache and compiled files
+__pycache__/
+*.py[cod]
+*$py.class
 
-# Jupyter
-.ipynb_checkpoints/
+# Test and tool caches
+.pytest_cache/
+.mypy_cache/
 
-# Logs and runtime
-*.log
-*.pot
-*.coverage
-coverage.xml
-htmlcov/
-*.pid
-*.seed
-*.sqlite3
-
-# OS files
-.DS_Store
-Thumbs.db
-
-# Data files
-data/*.csv
-
-# Python bytecode
-*~
-
-# Sensitive files
-secret.txt
-credentials.json
-
-# Model files/large binaries
+# Large local model files / downloaded artifacts
 *.gguf
 *.bin
 *.pth
 *.pt
 *.safetensors
-*.ckpt
+
+# Editor and OS files
+.vscode/
+.DS_Store
+Thumbs.db
