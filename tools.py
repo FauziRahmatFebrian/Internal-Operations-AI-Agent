@@ -14,35 +14,21 @@ already retrieved deterministically.
 """
 import os
 from typing import Literal, Optional
-
 from dotenv import load_dotenv
-
-load_dotenv()  # so GEMINI_API_KEY from .env is available no matter which
-                # script imports this module (main.py, agent.py, or tools.py
-                # run directly)
-
+load_dotenv()  
 import pandas as pd
 from pydantic import BaseModel
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
-
 from google import genai
 from google.genai import types
 
-# ---------------------------------------------------------------------------
 # Gemini client setup
-# ---------------------------------------------------------------------------
-_client: Optional[genai.Client] = None
 
+_client: Optional[genai.Client] = None
 MODEL_NAME = os.environ.get("GEMINI_MODEL", "gemini-3.1-flash-lite")
 
-
 def get_client() -> genai.Client:
-    """Lazily create a single shared Gemini client using GEMINI_API_KEY.
-
-    Lazy so that importing this module (e.g. to only use
-    search_knowledge_base) never requires an API key.
-    """
     global _client
     if _client is None:
         api_key = os.environ.get("GEMINI_API_KEY")
@@ -55,11 +41,7 @@ def get_client() -> genai.Client:
     return _client
 
 
-# ---------------------------------------------------------------------------
 # Pydantic schemas -> forces Gemini to return structured, validated JSON
-# instead of us regex-parsing free text. (Optional/nice-to-have item from
-# the brief: "Structured output validation dengan Pydantic".)
-# ---------------------------------------------------------------------------
 class ClassificationResult(BaseModel):
     intent: Literal[
         "knowledge_question",
@@ -101,7 +83,6 @@ _kb_matrix = None
 
 
 def _load_kb():
-    """Loads knowledge_base.csv and fits the TF-IDF vectorizer once."""
     global _kb_df, _vectorizer, _kb_matrix
     if _kb_df is None:
         _kb_df = pd.read_csv(_KB_PATH)
@@ -112,9 +93,7 @@ def _load_kb():
 
 
 def search_knowledge_base(query: str, top_k: int = 3) -> dict:
-    """Tool 1. Returns the top_k most relevant KB docs for `query`.
-
-    Score is TF-IDF cosine similarity in [0, 1]. Documents with a score
+    """ Score is TF-IDF cosine similarity in [0, 1]. Documents with a score
     of 0 (no lexical overlap at all) are dropped rather than returned
     as weak matches.
     """
@@ -162,7 +141,6 @@ question here - that happens in a separate step using the knowledge base."""
 
 
 def classify_request(user_input: str) -> dict:
-    """Tool 2. Uses Gemini with a Pydantic response_schema to force valid JSON."""
     client = get_client()
     response = client.models.generate_content(
         model=MODEL_NAME,
@@ -197,19 +175,15 @@ def create_task_object(
     assigned_team: Optional[str] = None,
     priority: Optional[str] = None,
 ) -> dict:
-    """Tool 3. Produces a *simulated* task object - never sent to a real system."""
     client = get_client()
-
     hint = ""
     if assigned_team:
         hint += f" Use assigned_team='{assigned_team}' unless the message clearly implies a different team."
     if priority:
         hint += f" Use priority='{priority}' unless the message clearly implies a different urgency."
-
     contents = user_input
     if hint:
         contents += "\n\n[Extraction hint, not part of the user's message]" + hint
-
     response = client.models.generate_content(
         model=MODEL_NAME,
         contents=contents,
@@ -230,12 +204,6 @@ def create_task_object(
 
 # ---------------------------------------------------------------------------
 # Optional tool: summarize_text(query, documents)
-# Handles the `summarize_request` intent properly - combines MULTIPLE
-# already-retrieved KB docs into one summary, instead of the agent just
-# returning a single doc's raw content (which doesn't scale to "summarize
-# our billing and refund policies" style requests spanning >1 document).
-# Only ever given documents that already cleared KB_SCORE_THRESHOLD in
-# agent.py, and instructed not to add anything beyond them.
 # ---------------------------------------------------------------------------
 _SUMMARIZE_SYSTEM_PROMPT = """You summarize internal documentation for an
 employee. You will be given a user question and one or more retrieved
@@ -249,19 +217,11 @@ knowledge."""
 
 
 def summarize_text(query: str, documents: list) -> dict:
-    """Optional tool. Summarizes a list of already-retrieved KB docs.
-
-    `documents` must be a list of dicts with doc_id/title/content, e.g.
-    the `results` list returned by search_knowledge_base - this function
-    does NOT do its own retrieval, so it can never summarize a document
-    that wasn't already vetted by the KB score threshold in agent.py.
-    """
     client = get_client()
     doc_block = "\n\n".join(
         f"[{d['doc_id']}] {d['title']}: {d['content']}" for d in documents
     )
     contents = f"User question: {query}\n\nDocuments:\n{doc_block}"
-
     response = client.models.generate_content(
         model=MODEL_NAME,
         contents=contents,
@@ -280,12 +240,7 @@ def summarize_text(query: str, documents: list) -> dict:
     }
 
 
-# ---------------------------------------------------------------------------
 # Optional tool: validate_json_output(output)
-# Rule-based (no LLM) structural QA gate. Run right before run_agent()
-# returns, so a malformed response is caught immediately instead of
-# silently reaching the user or the evaluation script.
-# ---------------------------------------------------------------------------
 _REQUIRED_KEYS = {
     "user_input": str,
     "intent": str,
@@ -316,21 +271,15 @@ def validate_json_output(output: dict) -> dict:
     }
 
 
-# ---------------------------------------------------------------------------
 # Manual isolated test - run `python tools.py` to sanity-check each tool
-# BEFORE wiring them into agent.py. search_knowledge_base needs no API key;
-# classify_request and create_task_object need GEMINI_API_KEY set.
-# ---------------------------------------------------------------------------
 if __name__ == "__main__":
     import json
 
     print("=== search_knowledge_base (no API key needed) ===")
     print(json.dumps(search_knowledge_base("How do I reset my password?"), indent=2))
-
     if os.environ.get("GEMINI_API_KEY"):
         print("\n=== classify_request ===")
         print(json.dumps(classify_request("I cannot login after resetting my password."), indent=2))
-
         print("\n=== create_task_object ===")
         print(
             json.dumps(

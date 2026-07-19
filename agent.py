@@ -14,6 +14,7 @@ def _answer_from_kb(kb_result: dict) -> dict:
         "answer": top["content"],
         "sources": [{"doc_id": top["doc_id"], "title": top["title"]}],
     }
+
 def _no_answer() -> dict:
     return {
         "answer": "I cannot answer this question based on the available knowledge base.",
